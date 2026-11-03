@@ -1,0 +1,24 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install workspace
+        run: uv sync --locked
+      - name: Lint, typecheck, test, data guards
+        run: make ci
+      - name: Pre-commit hooks (private keys, whitespace, the same guards)
+        run: uv run pre-commit run --all-files --show-diff-on-failure

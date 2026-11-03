@@ -1,0 +1,47 @@
+[project]
+name = "market-ml"
+version = "0.0.0"
+description = "Production ML on market data: open tools, benchmarks and MLOps projects"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+dependencies = []
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+india-costs = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "india-costs",
+    "mypy>=1.18",
+    "pre-commit>=4.3",
+    "pytest>=8.4",
+    "ruff>=0.14",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "PT", "N"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["india_costs", "check_raw_data", "licence_gate"]
+
+[tool.mypy]
+strict = true
+files = ["packages/india-costs/src", "tools/ci"]
+exclude = ["tests/"]
+
+[tool.pytest.ini_options]
+testpaths = ["packages", "tools"]
+pythonpath = ["tools/ci"]
+addopts = "-q --strict-markers --import-mode=importlib"
+filterwarnings = ["error"]

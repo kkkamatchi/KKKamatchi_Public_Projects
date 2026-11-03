@@ -1,0 +1,254 @@
+# Data-source registry read by tools/ci/licence_gate.py.
+#
+# status         ok: cleared for the kinds listed; verify: blocked until someone reads
+#                the current terms and flips it to ok; denied: never published from here
+#                unless written permission is recorded in permission_ref.
+# allowed_kinds  artifact kinds this source may feed:
+#                  reference-facts  rates, rules and schedules cited from public documents
+#                  dataset          redistributed or derived data
+#                  weights          trained model weights
+#                  metrics          published evaluation numbers
+# share_alike    licence every artifact built from this source must carry.
+#
+# Terms were read on the dates in `checked`. They change: re-read before each release.
+
+# --- Cleared ----------------------------------------------------------------------------
+
+[[source]]
+id = "ecb-reference-rates"
+name = "ECB euro foreign exchange reference rates"
+url = "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html"
+licence = "Free reuse with ECB cited and any modification stated"
+status = "ok"
+allowed_kinds = ["dataset", "weights", "metrics", "reference-facts"]
+checked = 2026-11-03
+notes = "Information-only reference rates, not executable prices."
+
+[[source]]
+id = "sec-edgar"
+name = "SEC EDGAR filings"
+url = "https://www.sec.gov/privacy"
+licence = "Public information; citing the SEC requested"
+status = "ok"
+allowed_kinds = ["dataset", "weights", "metrics", "reference-facts"]
+checked = 2026-11-03
+notes = "Fair access: at most 10 requests/second with a declared User-Agent."
+
+[[source]]
+id = "eia"
+name = "U.S. Energy Information Administration"
+url = "https://www.eia.gov/about/copyrights_reuse.php"
+licence = "U.S. government public domain; cite 'Source: U.S. Energy Information Administration (date)'"
+status = "ok"
+allowed_kinds = ["dataset", "weights", "metrics", "reference-facts"]
+checked = 2026-11-03
+notes = "Third-party content inside EIA products is excepted. API needs a free key."
+
+[[source]]
+id = "binance-vision"
+name = "Binance Vision bulk market data"
+url = "https://raw.githubusercontent.com/binance/binance-public-data/master/TERMS_AND_CONDITIONS.md"
+licence = "CC BY-NC-SA 4.0 (Dataset Terms v1.0, 26 Aug 2026)"
+status = "ok"
+allowed_kinds = ["dataset", "weights", "metrics"]
+share_alike = "cc-by-nc-sa-4.0"
+checked = 2026-11-03
+notes = "Non-commercial, credit Binance Vision, no live proprietary trading, no monetised content."
+
+[[source]]
+id = "indian-statutory-publications"
+name = "Gazette of India, Finance Acts, CBDT and stamp-duty notifications"
+url = "https://egazette.gov.in/"
+licence = "Government publications; rates are facts cited with source"
+status = "ok"
+allowed_kinds = ["reference-facts"]
+checked = 2026-11-03
+notes = "Tax and duty rates only. No market data."
+
+[[source]]
+id = "sebi-publications"
+name = "SEBI circulars and press releases"
+url = "https://www.sebi.gov.in/"
+licence = "Regulatory publications; rates and rules are facts cited with source"
+status = "ok"
+allowed_kinds = ["reference-facts"]
+checked = 2026-11-03
+notes = "Fee rates and rules only."
+
+[[source]]
+id = "nse-circulars"
+name = "NSE circulars (charge schedules)"
+url = "https://www.nseindia.com/resources/exchange-communication-circulars"
+licence = "Exchange circulars; charge rates are facts cited with source"
+status = "ok"
+allowed_kinds = ["reference-facts"]
+checked = 2026-11-03
+notes = "Charge schedules only. NSE market data is a separate, denied source."
+
+[[source]]
+id = "broker-pricing-pages"
+name = "Broker public pricing pages"
+url = "https://zerodha.com/charges"
+licence = "Public price lists; figures are facts cited with source and date"
+status = "ok"
+allowed_kinds = ["reference-facts"]
+checked = 2026-11-03
+notes = "Cite as a dated fact, never as a referral or affiliate link."
+
+# --- Pending verification ---------------------------------------------------------------
+
+[[source]]
+id = "fed-h10"
+name = "Federal Reserve Board H.10 foreign exchange rates (Data Download Program)"
+url = "https://www.federalreserve.gov/disclaimer.htm"
+licence = "Board says site information is public domain unless marked otherwise"
+status = "verify"
+allowed_kinds = ["dataset", "weights", "metrics", "reference-facts"]
+checked = 2026-11-03
+notes = "Confirm H.10 carries no third-party marking. Download from the Board, never via FRED."
+
+[[source]]
+id = "world-bank-commodities"
+name = "World Bank commodity prices (Pink Sheet / GEM Commodities)"
+url = "https://datacatalog.worldbank.org/search/dataset/0037798/Global-Economic-Monitor-Commodities"
+licence = "CC BY 4.0, with third-party data excepted"
+status = "verify"
+allowed_kinds = ["dataset", "weights", "metrics", "reference-facts"]
+checked = 2026-11-03
+notes = "Clear each series' third-party attribution before use; add one entry per cleared series."
+
+# --- Denied -----------------------------------------------------------------------------
+
+[[source]]
+id = "nse-market-data"
+name = "NSE market data (bhavcopies, indices, any NSE-derived data)"
+url = "https://www.nseindia.com/static/nse-terms-of-use"
+licence = "Personal, non-commercial use; redistribution is a paid NSE Data product"
+status = "denied"
+allowed_kinds = []
+permission_ref = ""
+checked = 2026-11-03
+notes = "Needs written permission from NSE Data / NSE Indices for any dataset, weights or metrics."
+
+[[source]]
+id = "bse-market-data"
+name = "BSE market data"
+url = "https://www.bseindia.com/"
+licence = "Exchange rights reserved"
+status = "denied"
+allowed_kinds = []
+permission_ref = ""
+checked = 2026-11-03
+notes = "Not researched; treat like NSE until written permission is on record."
+
+[[source]]
+id = "mcx-market-data"
+name = "MCX market data"
+url = "https://www.mcxindia.com/terms-and-conditions-of-usage-for-website"
+licence = "MCX reserves all rights"
+status = "denied"
+allowed_kinds = []
+permission_ref = ""
+checked = 2026-11-03
+notes = "Stays in the private store."
+
+[[source]]
+id = "kite-connect"
+name = "Zerodha Kite Connect API content"
+url = "https://kite.trade/terms"
+licence = "No databases or permanent copies; delete cached content when access ends"
+status = "denied"
+allowed_kinds = []
+permission_ref = ""
+checked = 2026-11-03
+notes = "Private use only, and storage only if Zerodha agrees in writing."
+
+[[source]]
+id = "fred"
+name = "FRED (St. Louis Fed)"
+url = "https://fred.stlouisfed.org/legal/terms_of_use.html"
+licence = "Terms prohibit use in developing or training ML systems"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = "Fetch public-domain series (e.g. H.10) from the original publisher instead."
+
+[[source]]
+id = "fbil"
+name = "FBIL benchmarks (USD-INR reference rate)"
+url = "https://www.fbil.org.in/uploads/FBIL_Terms_of_Use_and_Subscription_Disclaimer_for_FBIL_Benchmarks_97d336023d.pdf"
+licence = "Delayed non-commercial viewing only; archives need a paid subscription"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = "Derive USD-INR from ECB cross rates instead."
+
+[[source]]
+id = "cme"
+name = "CME Group market data"
+url = "https://www.cmegroup.com/market-data/files/market-data-license-agreement-updates-june-2026.pdf"
+licence = "Personal non-commercial use; any AI/ML use prohibited"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = "DS-45 (Jun 2026) bans training, fine-tuning, RAG and automated signals."
+
+[[source]]
+id = "tardis"
+name = "Tardis.dev crypto market data"
+url = "https://docs.tardis.dev/legal/terms-of-service"
+licence = "No redistribution; models trained on the data may not be published"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = ""
+
+[[source]]
+id = "coinbase-market-data"
+name = "Coinbase market data"
+url = "https://www.coinbase.com/legal/market_data"
+licence = "No AI/ML training, validation or benchmarking; no derived works"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = ""
+
+[[source]]
+id = "yahoo-finance"
+name = "Yahoo Finance (including via yfinance)"
+url = "https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html"
+licence = "No automated collection, redistribution or substitute databases"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = ""
+
+[[source]]
+id = "alpaca-market-data"
+name = "Alpaca market data API"
+url = "https://alpaca.markets/support/redistribute-alpaca-api"
+licence = "No redistribution of API data"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = ""
+
+[[source]]
+id = "tiingo"
+name = "Tiingo"
+url = "https://www.tiingo.com/about/pricing"
+licence = "Internal use only; no display or sharing"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = ""
+
+[[source]]
+id = "eodhd"
+name = "EOD Historical Data (EODHD)"
+url = "https://eodhd.com/"
+licence = "No redistribution, display or access in original or repackaged form"
+status = "denied"
+allowed_kinds = []
+checked = 2026-11-03
+notes = "Private research only."
