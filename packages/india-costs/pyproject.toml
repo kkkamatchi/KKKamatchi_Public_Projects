@@ -1,0 +1,25 @@
+[project]
+name = "india-costs"
+version = "0.1.0"
+description = "Statutory, exchange and broker charges on Indian equity trades, with dated rate tables"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+keywords = ["india", "nse", "stt", "brokerage", "backtesting", "transaction-costs"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.scripts]
+india-costs = "india_costs.__main__:main"
+
+[build-system]
+requires = ["uv_build>=0.10,<0.11"]
+build-backend = "uv_build"

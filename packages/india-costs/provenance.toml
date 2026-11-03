@@ -1,0 +1,19 @@
+artifact = "india-costs rate tables (src/india_costs/data/nse.toml)"
+kind = "reference-facts"
+licence = "Apache-2.0"
+
+[[inputs]]
+source = "indian-statutory-publications"
+as_of = 2026-11-03
+
+[[inputs]]
+source = "sebi-publications"
+as_of = 2026-11-03
+
+[[inputs]]
+source = "nse-circulars"
+as_of = 2026-11-03
+
+[[inputs]]
+source = "broker-pricing-pages"
+as_of = 2026-11-03

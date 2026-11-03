@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+build/
+dist/
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Market data never lives in this repo (see DATA_POLICY.md)
+/data/
+/lake/
+*.parquet
+*.duckdb
+*.duckdb.wal
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,563 @@
+# Statutory and exchange charges on NSE equity trades, by trade date.
+#
+# rate     fraction of the basis, as a string (0.1% = "0.001"; Rs 10 per crore = "0.000001")
+# basis    trade value (price x quantity); option premium x quantity for equity_options
+# start    first trade date the rate applies; end: last trade date (omit while in force)
+# segment  one segment or "*"; side: "buy", "sell" or "both"; exchange: "NSE" or "*"
+#
+# Every component/segment/side must resolve to exactly one rate on every date from
+# coverage_start to as_of; load_table() rejects gaps and overlaps. Each entry cites
+# the primary source it was checked against on the as_of date.
+
+schema_version = 1
+as_of = 2026-11-03
+coverage_start = 2020-07-01
+
+# --- Securities Transaction Tax (Income Tax Act / Finance (No. 2) Act 2004, s.98) -------
+
+[[rate]]
+component = "stt"
+segment = "equity_delivery"
+side = "both"
+rate = "0.001"
+start = 2020-07-01
+source = "https://archives.nseindia.com/content/circulars/FATAX73524.pdf"
+note = "0.1% on delivery buys and sells; unchanged by the 2023, 2024 and 2026 revisions."
+
+[[rate]]
+component = "stt"
+segment = "equity_intraday"
+side = "buy"
+rate = "0"
+start = 2020-07-01
+source = "https://archives.nseindia.com/content/circulars/FATAX73524.pdf"
+note = "Only the sale of a non-delivery trade is taxed."
+
+[[rate]]
+component = "stt"
+segment = "equity_intraday"
+side = "sell"
+rate = "0.00025"
+start = 2020-07-01
+source = "https://archives.nseindia.com/content/circulars/FATAX73524.pdf"
+note = "Valued at the client's VWAP in the scrip that day (STT Rules 2004, r.3), not the sell price."
+
+[[rate]]
+component = "stt"
+segment = "equity_futures"
+side = "buy"
+rate = "0"
+start = 2020-07-01
+source = "https://archives.nseindia.com/content/circulars/FATAX73524.pdf"
+
+[[rate]]
+component = "stt"
+segment = "equity_futures"
+side = "sell"
+rate = "0.0001"
+start = 2020-07-01
+end = 2023-03-31
+source = "https://archives.nseindia.com/content/circulars/FATAX56235.pdf"
+
+[[rate]]
+component = "stt"
+segment = "equity_futures"
+side = "sell"
+rate = "0.000125"
+start = 2023-04-01
+end = 2024-09-30
+source = "https://archives.nseindia.com/content/circulars/FATAX56235.pdf"
+note = "Finance Act 2023."
+
+[[rate]]
+component = "stt"
+segment = "equity_futures"
+side = "sell"
+rate = "0.0002"
+start = 2024-10-01
+end = 2026-03-31
+source = "https://archives.nseindia.com/content/circulars/FATAX63809.pdf"
+note = "Finance (No. 2) Act 2024."
+
+[[rate]]
+component = "stt"
+segment = "equity_futures"
+side = "sell"
+rate = "0.0005"
+start = 2026-04-01
+source = "https://archives.nseindia.com/content/circulars/FATAX73524.pdf"
+note = "Finance Act 2026 (assent 30 Mar 2026); exchanges applied it to trades from 1 Apr 2026."
+
+[[rate]]
+component = "stt"
+segment = "equity_options"
+side = "buy"
+rate = "0"
+start = 2020-07-01
+source = "https://archives.nseindia.com/content/circulars/FATAX73524.pdf"
+
+[[rate]]
+component = "stt"
+segment = "equity_options"
+side = "sell"
+rate = "0.0005"
+start = 2020-07-01
+end = 2023-03-31
+source = "https://archives.nseindia.com/content/circulars/FATAX56235.pdf"
+note = "On premium."
+
+[[rate]]
+component = "stt"
+segment = "equity_options"
+side = "sell"
+rate = "0.000625"
+start = 2023-04-01
+end = 2024-09-30
+source = "https://archives.nseindia.com/content/circulars/FATAX56235.pdf"
+note = "On premium. Finance Act 2023."
+
+[[rate]]
+component = "stt"
+segment = "equity_options"
+side = "sell"
+rate = "0.001"
+start = 2024-10-01
+end = 2026-03-31
+source = "https://archives.nseindia.com/content/circulars/FATAX63809.pdf"
+note = "On premium. Finance (No. 2) Act 2024."
+
+[[rate]]
+component = "stt"
+segment = "equity_options"
+side = "sell"
+rate = "0.0015"
+start = 2026-04-01
+source = "https://archives.nseindia.com/content/circulars/FATAX73524.pdf"
+note = "On premium. Finance Act 2026."
+
+# --- Stamp duty (Indian Stamp Act as amended by Finance Act 2019; buyer only) ------------
+
+[[rate]]
+component = "stamp_duty"
+segment = "equity_delivery"
+side = "buy"
+rate = "0.00015"
+start = 2020-07-01
+source = "https://www.nseindia.com/static/invest/first-time-investor-stamp-duty-charges-taxes"
+note = "Rs 1,500 per crore. Collected centrally through the exchanges from 1 Jul 2020."
+
+[[rate]]
+component = "stamp_duty"
+segment = "equity_intraday"
+side = "buy"
+rate = "0.00003"
+start = 2020-07-01
+source = "https://www.nseindia.com/static/invest/first-time-investor-stamp-duty-charges-taxes"
+
+[[rate]]
+component = "stamp_duty"
+segment = "equity_futures"
+side = "buy"
+rate = "0.00002"
+start = 2020-07-01
+source = "https://www.nseindia.com/static/invest/first-time-investor-stamp-duty-charges-taxes"
+
+[[rate]]
+component = "stamp_duty"
+segment = "equity_options"
+side = "buy"
+rate = "0.00003"
+start = 2020-07-01
+source = "https://www.nseindia.com/static/invest/first-time-investor-stamp-duty-charges-taxes"
+note = "On premium."
+
+[[rate]]
+component = "stamp_duty"
+segment = "*"
+side = "sell"
+rate = "0"
+start = 2020-07-01
+source = "https://www.nseindia.com/static/invest/first-time-investor-stamp-duty-charges-taxes"
+note = "Payable by the buyer only."
+
+# --- SEBI turnover fees -------------------------------------------------------------------
+
+[[rate]]
+component = "sebi_fee"
+segment = "*"
+side = "both"
+rate = "0.0000005"
+start = 2020-07-01
+end = 2021-03-31
+source = "https://www.sebi.gov.in/media/press-releases/apr-2020/sebi-reduces-broker-turnover-fees-and-filing-fees-for-issuers_46571.html"
+note = "Rs 10 per crore halved to Rs 5 for 1 Jun 2020 to 31 Mar 2021 (COVID relief). Some brokers billed Rs 5 until May 2021."
+
+[[rate]]
+component = "sebi_fee"
+segment = "*"
+side = "both"
+rate = "0.000001"
+start = 2021-04-01
+source = "https://www.nseindia.com/static/invest/first-time-investor-sebi-turnover-fees-stt-other-levies"
+note = "Rs 10 per crore; options on premium. Kept by the SEBI (Stock Brokers) Regulations 2026."
+
+# --- GST --------------------------------------------------------------------------------
+
+[[rate]]
+component = "gst"
+segment = "*"
+side = "both"
+rate = "0.18"
+start = 2020-07-01
+source = "https://www.nseindia.com/static/invest/first-time-investor-sebi-turnover-fees-stt-other-levies"
+note = "On brokerage, exchange transaction charges, IPFT and DP charges. Not on STT or stamp duty. Unchanged by the Sept 2025 rate rationalisation."
+
+[[rate]]
+component = "gst_on_sebi_fee"
+segment = "*"
+side = "both"
+rate = "0"
+start = 2020-07-01
+end = 2022-07-17
+source = "https://www.sebi.gov.in/sebi_data/faqfiles/mar-2023/1678853311186.pdf"
+note = "SEBI's services were exempt from GST until 17 Jul 2022."
+
+[[rate]]
+component = "gst_on_sebi_fee"
+segment = "*"
+side = "both"
+rate = "0.18"
+start = 2022-07-18
+source = "https://www.sebi.gov.in/sebi_data/faqfiles/mar-2023/1678853311186.pdf"
+
+# --- NSE transaction charges ------------------------------------------------------------
+# Before 1 Oct 2024 NSE billed members by monthly-turnover slab. The figures below are the
+# top slab, which is what discount brokers (e.g. Zerodha) billed clients. From 1 Oct 2024
+# SEBI's true-to-label circular made the charge flat and uniform.
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_delivery"
+side = "both"
+rate = "0.0000325"
+start = 2020-07-01
+end = 2020-12-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA46730.pdf"
+note = "Rs 3.25 per lakh (top slab)."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_intraday"
+side = "both"
+rate = "0.0000325"
+start = 2020-07-01
+end = 2020-12-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA46730.pdf"
+note = "Rs 3.25 per lakh (top slab)."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_futures"
+side = "both"
+rate = "0.000019"
+start = 2020-07-01
+end = 2020-12-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA46730.pdf"
+note = "Rs 1.90 per lakh (top slab)."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_options"
+side = "both"
+rate = "0.0005"
+start = 2020-07-01
+end = 2020-12-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA46730.pdf"
+note = "Rs 50 per lakh of premium."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_delivery"
+side = "both"
+rate = "0.0000345"
+start = 2021-01-01
+end = 2023-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA46730.pdf"
+note = "6% increase across segments: Rs 3.45 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_intraday"
+side = "both"
+rate = "0.0000345"
+start = 2021-01-01
+end = 2023-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA46730.pdf"
+note = "Rs 3.45 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_futures"
+side = "both"
+rate = "0.00002"
+start = 2021-01-01
+end = 2023-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA46730.pdf"
+note = "Rs 2.00 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_options"
+side = "both"
+rate = "0.00053"
+start = 2021-01-01
+end = 2023-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA46730.pdf"
+note = "Rs 53 per lakh of premium."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_delivery"
+side = "both"
+rate = "0.0000325"
+start = 2023-04-01
+end = 2024-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "The 2021 increase rolled back: Rs 3.25 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_intraday"
+side = "both"
+rate = "0.0000325"
+start = 2023-04-01
+end = 2024-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "Rs 3.25 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_futures"
+side = "both"
+rate = "0.000019"
+start = 2023-04-01
+end = 2024-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "Rs 1.90 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_options"
+side = "both"
+rate = "0.0005"
+start = 2023-04-01
+end = 2024-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "Rs 50 per lakh of premium."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_delivery"
+side = "both"
+rate = "0.0000322"
+start = 2024-04-01
+end = 2024-09-30
+source = "https://nsearchives.nseindia.com/content/circulars/FA61137.pdf"
+note = "Rs 3.22 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_intraday"
+side = "both"
+rate = "0.0000322"
+start = 2024-04-01
+end = 2024-09-30
+source = "https://nsearchives.nseindia.com/content/circulars/FA61137.pdf"
+note = "Rs 3.22 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_futures"
+side = "both"
+rate = "0.0000188"
+start = 2024-04-01
+end = 2024-09-30
+source = "https://nsearchives.nseindia.com/content/circulars/FA61137.pdf"
+note = "Rs 1.88 per lakh."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_options"
+side = "both"
+rate = "0.000495"
+start = 2024-04-01
+end = 2024-09-30
+source = "https://nsearchives.nseindia.com/content/circulars/FA61137.pdf"
+note = "Rs 49.50 per lakh of premium."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_delivery"
+side = "both"
+rate = "0.0000297"
+start = 2024-10-01
+end = 2026-02-28
+source = "https://nsearchives.nseindia.com/content/circulars/FA64232.pdf"
+note = "True to label, flat: Rs 297 per crore."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_intraday"
+side = "both"
+rate = "0.0000297"
+start = 2024-10-01
+end = 2026-02-28
+source = "https://nsearchives.nseindia.com/content/circulars/FA64232.pdf"
+note = "Rs 297 per crore."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_futures"
+side = "both"
+rate = "0.0000173"
+start = 2024-10-01
+end = 2026-02-28
+source = "https://nsearchives.nseindia.com/content/circulars/FA64232.pdf"
+note = "Rs 173 per crore."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_options"
+side = "both"
+rate = "0.0003503"
+start = 2024-10-01
+end = 2026-02-28
+source = "https://nsearchives.nseindia.com/content/circulars/FA64232.pdf"
+note = "Rs 3,503 per crore of premium."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_delivery"
+side = "both"
+rate = "0.000030699"
+start = 2026-03-01
+source = "https://nsearchives.nseindia.com/content/circulars/FA73061.pdf"
+note = "Rs 306.99 per crore; with IPFT of Rs 0.01 the total stays Rs 307."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_intraday"
+side = "both"
+rate = "0.000030699"
+start = 2026-03-01
+source = "https://nsearchives.nseindia.com/content/circulars/FA73061.pdf"
+note = "Rs 306.99 per crore."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_futures"
+side = "both"
+rate = "0.000018299"
+start = 2026-03-01
+source = "https://nsearchives.nseindia.com/content/circulars/FA73061.pdf"
+note = "Rs 182.99 per crore."
+
+[[rate]]
+component = "exchange_txn"
+exchange = "NSE"
+segment = "equity_options"
+side = "both"
+rate = "0.000355299"
+start = 2026-03-01
+source = "https://nsearchives.nseindia.com/content/circulars/FA73061.pdf"
+note = "Rs 3,552.99 per crore of premium."
+
+# --- NSE Investor Protection Fund Trust (IPFT) charges ----------------------------------
+
+[[rate]]
+component = "ipft"
+exchange = "NSE"
+segment = "*"
+side = "both"
+rate = "0.000000001"
+start = 2020-07-01
+end = 2023-03-31
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "Rs 0.01 per crore. The circular confirms this level before Apr 2023; continuity back to Jul 2020 is assumed."
+
+[[rate]]
+component = "ipft"
+exchange = "NSE"
+segment = "equity_delivery"
+side = "both"
+rate = "0.000001"
+start = 2023-04-01
+end = 2026-02-28
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "Rs 10 per crore."
+
+[[rate]]
+component = "ipft"
+exchange = "NSE"
+segment = "equity_intraday"
+side = "both"
+rate = "0.000001"
+start = 2023-04-01
+end = 2026-02-28
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "Rs 10 per crore."
+
+[[rate]]
+component = "ipft"
+exchange = "NSE"
+segment = "equity_futures"
+side = "both"
+rate = "0.000001"
+start = 2023-04-01
+end = 2026-02-28
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "Rs 10 per crore."
+
+[[rate]]
+component = "ipft"
+exchange = "NSE"
+segment = "equity_options"
+side = "both"
+rate = "0.000005"
+start = 2023-04-01
+end = 2026-02-28
+source = "https://nsearchives.nseindia.com/content/circulars/FA56129.pdf"
+note = "Rs 50 per crore of premium."
+
+[[rate]]
+component = "ipft"
+exchange = "NSE"
+segment = "*"
+side = "both"
+rate = "0.000000001"
+start = 2026-03-01
+source = "https://nsearchives.nseindia.com/content/circulars/FA73061.pdf"
+note = "Back to Rs 0.01 per crore, with transaction charges raised to keep totals unchanged."
