@@ -1,12 +1,26 @@
-name: ci
+name: market-ml
 
 on:
   push:
     branches: [main]
+    paths:
+      - "market-ml/**"
+      - ".github/workflows/market-ml.yml"
+      - ".pre-commit-config.yaml"
+      - ".raw-data-allow"
   pull_request:
+    paths:
+      - "market-ml/**"
+      - ".github/workflows/market-ml.yml"
+      - ".pre-commit-config.yaml"
+      - ".raw-data-allow"
 
 permissions:
   contents: read
+
+defaults:
+  run:
+    working-directory: market-ml
 
 jobs:
   checks:
@@ -16,6 +30,7 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
+          cache-dependency-glob: market-ml/uv.lock
       - name: Install workspace
         run: uv sync --locked
       - name: Lint, typecheck, test, data guards

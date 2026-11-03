@@ -10,7 +10,7 @@ Next: an NSE bhavcopy parser with schema checks (code and synthetic fixtures onl
 
 ## Ground rules
 
-- **No market data or model weights in this repo.** CI fails on data, archive and weight files, notebooks saved with outputs, and files over 500 KB; synthetic fixtures live only under paths listed in [`.raw-data-allow`](.raw-data-allow).
+- **No market data or model weights in this repo.** CI fails on data, archive and weight files, notebooks saved with outputs, and files over 500 KB; synthetic fixtures live only under paths listed in [`.raw-data-allow`](../.raw-data-allow) at the repository root.
 - **Licence gate.** Anything published from here (datasets, weights, metrics, reference tables) declares its inputs in a `provenance.toml`, checked against [`licences/sources.toml`](licences/sources.toml). See [DATA_POLICY.md](DATA_POLICY.md).
 - **Tools, not calls.** Nothing here recommends buying or selling anything, and nothing reports trading returns.
 
@@ -22,6 +22,8 @@ Needs [uv](https://docs.astral.sh/uv/). Python 3.12 is pinned in `.python-versio
 make setup   # install the workspace and git hooks
 make ci      # lint, typecheck, test, data guards (what GitHub Actions runs)
 ```
+
+Run these from this folder. Git hooks and the CI workflow live at the repository root.
 
 ## Disclaimer
 

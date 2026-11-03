@@ -31,7 +31,8 @@ from typing import Any
 
 KINDS = frozenset({"dataset", "weights", "metrics", "reference-facts"})
 STATUSES = frozenset({"ok", "verify", "denied"})
-REGISTRY = Path("licences/sources.toml")
+PROJECT = Path(__file__).resolve().parents[2]
+REGISTRY = PROJECT / "licences" / "sources.toml"
 SOURCE_KEYS = frozenset({"id", "name", "url", "licence", "status", "allowed_kinds", "checked"})
 SOURCE_KEYS |= {"share_alike", "permission_ref", "notes"}
 PROVENANCE_KEYS = frozenset({"artifact", "kind", "licence", "inputs", "notes"})
@@ -110,7 +111,7 @@ def check_provenance(
             errors.append(f"{where}: as_of must be a TOML date (YYYY-MM-DD)")
         src = sources.get(sid)
         if src is None:
-            errors.append(f"{where}: not in {REGISTRY}")
+            errors.append(f"{where}: not in {REGISTRY.relative_to(PROJECT)}")
             continue
         if src.status == "verify":
             errors.append(f"{where}: terms not yet verified; confirm them and set status = 'ok'")
@@ -145,7 +146,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             ["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True, check=True
         ).stdout.strip()
     )
-    sources, errors = load_registry(args.registry or root / REGISTRY)
+    sources, errors = load_registry(args.registry or REGISTRY)
     for path in args.files or provenance_files(root):
         doc = tomllib.loads(path.read_text())
         errors.extend(check_provenance(path, doc, sources))

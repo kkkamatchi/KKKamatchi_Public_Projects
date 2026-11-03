@@ -4,7 +4,7 @@ Most market data may be viewed but not redistributed, and some may not be used t
 
 ## Rules
 
-1. **No data files or weights in git.** `tools/ci/check_raw_data.py` blocks data, archive and model-weight files (`.csv`, `.parquet`, `.json`, `.zip`, `.joblib`, `.safetensors` and more, in any position, so `.csv.bz2` counts), notebooks saved with outputs, and anything over 500 KB. Paths in `.raw-data-allow` are exempt; only synthetic fixtures go there. The check catches accidents, not deliberate evasion: review every diff before it goes public.
+1. **No data files or weights in git.** `tools/ci/check_raw_data.py` blocks data, archive and model-weight files (`.csv`, `.parquet`, `.json`, `.zip`, `.joblib`, `.safetensors` and more, in any position, so `.csv.bz2` counts), notebooks saved with outputs, and anything over 500 KB. Paths in the repository root's `.raw-data-allow` are exempt; only synthetic fixtures go there. The check catches accidents, not deliberate evasion: review every diff before it goes public.
 2. **Every published artifact declares its inputs.** A dataset, model weights, published metrics, or a reference table gets a `provenance.toml` beside it:
 
    ```toml

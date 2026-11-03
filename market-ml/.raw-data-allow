@@ -1,4 +1,0 @@
-# Paths where data-like files may be committed. Glob patterns, one per line,
-# matched against the repo-relative path. Only synthetic fixtures belong here:
-# never market data from any exchange, broker or vendor (see DATA_POLICY.md).
-packages/*/tests/fixtures/synthetic/*

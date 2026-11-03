@@ -8,7 +8,8 @@ model weights are published to Hugging Face behind the licence gate, never commi
 - a Jupyter notebook saved with outputs, which can embed data tables;
 - any file over 500 KB.
 
-Paths matching a glob in `.raw-data-allow` (synthetic fixtures) are exempt.
+Paths matching a glob in the repository root's `.raw-data-allow` (synthetic fixtures)
+are exempt. Checks cover the whole repository, not just this project.
 
 Usage: check_raw_data.py [FILE ...]   (no files: check everything git would commit)
 """

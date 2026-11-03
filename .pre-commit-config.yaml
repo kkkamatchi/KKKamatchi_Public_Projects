@@ -22,12 +22,12 @@ repos:
     hooks:
       - id: block-raw-market-data
         name: block raw market data
-        entry: uv run python tools/ci/check_raw_data.py
+        entry: uv run --project market-ml python market-ml/tools/ci/check_raw_data.py
         language: system
         pass_filenames: true
       - id: licence-gate
         name: licence gate
-        entry: uv run python tools/ci/licence_gate.py
+        entry: uv run --project market-ml python market-ml/tools/ci/licence_gate.py
         language: system
         pass_filenames: false
         files: (provenance\.toml|licences/sources\.toml)$
