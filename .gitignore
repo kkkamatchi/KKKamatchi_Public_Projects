@@ -1,0 +1,8 @@
+# Each project keeps its own .gitignore; these apply everywhere.
+.DS_Store
+.venv/
+__pycache__/
+.env
+.env.*
+*.pem
+*.key
